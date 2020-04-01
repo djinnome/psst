@@ -14,8 +14,9 @@ def solve_model(model, solver='glpk', solver_io=None, keepfiles=True, verbose=Tr
     else:
         solver = SolverFactory(solver, solver_io=solver_io)
     model.preprocess()
-    if is_mip:
-        solver.options['mipgap'] = mipgap
+    if is_mip and solver=='scip':
+        solver.options['limits/gap']=mipgap
+
 
     with warnings.catch_warnings():
         warnings.simplefilter(PSST_WARNING)

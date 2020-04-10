@@ -3,13 +3,11 @@
 
 import os
 from codecs import open
-from setuptools import setup
+from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
 # TODO: Testing stuff goes here?
-
-packages = ['psst']
 
 requirements = [
     'click',
@@ -51,7 +49,7 @@ setup(
     author=about['__author__'],
     author_email=about['__author_email__'],
     url=about['__url__'],
-    packages=packages,
+    packages=find_packages(),
     package_dir={'psst': 'psst'},
     entry_points={'console_scripts': ['psst=psst.cli:cli']},
     include_package_data=True,

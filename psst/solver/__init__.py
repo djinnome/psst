@@ -8,7 +8,7 @@ from .results import PSSTResults
 PSST_WARNING = os.getenv('PSST_WARNING', 'ignore')
 
 
-def solve_model(model, solver='glpk', solver_io=None, keepfiles=True, verbose=True, symbolic_solver_labels=True, is_mip=True, mipgap=0.01):
+def solve_model(model, solver='glpk', solver_io=None, keepfiles=True, verbose=True, symbolic_solver_labels=True, is_mip=True, mipgap=1.0):
     if solver == 'xpress':
         solver = SolverFactory(solver, solver_io=solver_io, is_mip=is_mip)
     else:
@@ -17,7 +17,9 @@ def solve_model(model, solver='glpk', solver_io=None, keepfiles=True, verbose=Tr
     if is_mip and solver=='scip':
         solver.options['limits/gap']=mipgap
 
-
+    if is_mip and solver=='gurobi':
+        solver.options['mipgap'] = mipgap
+	
     with warnings.catch_warnings():
         warnings.simplefilter(PSST_WARNING)
         solver.solve(model, suffixes=['dual'], tee=verbose, keepfiles=keepfiles, symbolic_solver_labels=symbolic_solver_labels)

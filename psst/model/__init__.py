@@ -333,9 +333,8 @@ class PSSTModel(object):
         return string
 
     def solve(self, solver='glpk', verbose=False, keepfiles=False, resolve=False, **kwargs):
-        if solver == 'xpress':
+        if solver == 'xpress' or solver=='gurobi':
             resolve = True
-
         solve_model(self._model, solver=solver, verbose=verbose, keepfiles=keepfiles, **kwargs)
         self._results = PSSTResults(self)
 

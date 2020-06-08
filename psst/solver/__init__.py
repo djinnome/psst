@@ -24,7 +24,7 @@ def solve_model(model, solver='glpk', solver_io=None, keepfiles=True, verbose=Tr
             if 'MIPGap' in kwargs['solver_options']:
                 solver.options['MIPGap'] = float(kwargs['solver_options']['MIPGap'])
             if 'TimeLimit' in kwargs['solver_options']:
-	        solver.options['TimeLimit'] = float(kwargs['solver_options']['TimeLimit'])
+                solver.options['TimeLimit'] = float(kwargs['solver_options']['TimeLimit'])
     with warnings.catch_warnings():
         warnings.simplefilter(PSST_WARNING)
         solver.solve(model, suffixes=['dual'], tee=verbose, keepfiles=keepfiles, symbolic_solver_labels=symbolic_solver_labels)

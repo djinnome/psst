@@ -39,7 +39,7 @@ class PSSTResults(object):
     @property
     def unit_commitment(self):
         df = self._get('UnitOn', self._model)
-        return df.clip_lower(0)
+        return df.clip(lower=0)
 
     @property
     def line_power(self):

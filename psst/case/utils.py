@@ -49,7 +49,8 @@ def incremental_cost(p, cost, N):
 def calculate_PTDF(case, precision=None, tolerance=None):
     bus = case.bus.copy(deep=True)
     branch = case.branch.copy(deep=True)
-    value = [i + 1 for i in range(0, len(bus.index))]
+#    value = [i + 1 for i in range(0, len(bus.index))]
+    value = [i for i in range(0, len(bus.index))]
     bus_name = bus.index
     bus.index = value
     bus.index = bus.index.astype(int)
@@ -62,7 +63,7 @@ def calculate_PTDF(case, precision=None, tolerance=None):
         ptdf = ptdf.round(precision)
     if tolerance is not None:
         ptdf[abs(ptdf) < tolerance] = 0
-    return ptdf
+    return ptdf, branch
 
 
 def solve_dcopf(case, hour=None,

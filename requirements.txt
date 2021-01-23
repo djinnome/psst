@@ -10,4 +10,5 @@ cryptography==1.4
 PyYAML==3.11
 pytest==2.9.2
 pyomo==5.6.8
+pyutilib=5.7.3
 scipy
